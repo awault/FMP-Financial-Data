@@ -4,5 +4,10 @@ import requests
 from dotenv import load_dotenv
 load_dotenv()
 
-FMP_API_KEY = os.getenv("FMP_API_KEY")
-print(FMP_API_KEY)
+# Check if API key is available
+from src.downloader import check_api_key
+check_api_key()
+
+# Fetch Data for AAPL
+from src.downloader import fetch_fmp_data
+fetch_fmp_data('AAPL')
