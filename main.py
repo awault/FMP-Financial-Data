@@ -10,4 +10,6 @@ check_api_key()
 
 # Fetch Data for AAPL
 from src.downloader import fetch_fmp_data
-fetch_fmp_data('AAPL')
+data = fetch_fmp_data('AAPL')
+print('\n')
+print(data.head())
