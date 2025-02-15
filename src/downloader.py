@@ -40,3 +40,23 @@ def fetch_fmp_data(ticker):
 
     except requests.RequestException as e:
         print(f'Error fetching data: {e}')
+
+def fetch_nasdaq_100():
+    url= f'https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey={FMP_API_KEY}'
+
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+
+        # Extract tickers from json
+        tickers = [stock["symbol"] for stock in data]
+        return tickers
+    
+    except requests.RequestException as e:
+        print(f'Error fetching NASDAQ-100 tickers: {e}')
+        return[]
+    
+
+
+

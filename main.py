@@ -12,11 +12,14 @@ check_api_key()
 # Import fetch fmp data function
 from src.downloader import fetch_fmp_data
 
+# Import fetch NASDAQ 100
+from src.downloader import fetch_nasdaq_100
+
 def main():
     print("\nSelect an option to fetch stock price data:\n")
     print("1. Enter a single ticker")
     print("2. Enter a custom list of tickers")
-    print("3. Use the full NASDAQ ticker list")
+    print("3. Fetch the NASDAQ 100")
 
     choice = input("\nEnter your choice:").strip()
 
@@ -27,7 +30,7 @@ def main():
         tickers = input('Enter tickers separated by commas: ').strip().upper().split(",")
 
     elif choice == "3":
-        tickers = [NASDAQ]
+        tickers = fetch_nasdaq_100()
 
     else:
         print("\nInvalid choice. Exiting program.\n")
