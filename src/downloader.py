@@ -27,19 +27,24 @@ def fetch_fmp_data(ticker):
         response.raise_for_status()
         data = response.json()
 
+        # Check for API error message
+        if isinstance(data,dict) and "Error Message" in data:
+            print(f'Error: {data['Error Message']} (Ticker: {ticker})')
+            return None
+
+        # Check if 'historical' exists and is a non-empty list
         if 'historical' in data:
             #Flatten historical list into a DataFrame
             historical_data = pd.DataFrame(data['historical'])
             return historical_data
         
-        elif isinstance(data,dict):
-            return pd.DataFrame([data])
+        # Handle cases where API returns an empty response
+        print(f"\nNo historical data found for {ticker}.\n")
+        return None
         
-        else:
-            print("Unexpected data format received")
-
     except requests.RequestException as e:
         print(f'Error fetching data: {e}')
+        return None
 
 def fetch_nasdaq_100():
     url= f'https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey={FMP_API_KEY}'
