@@ -1,6 +1,6 @@
 # Ignore environment file
 .env
-
+.replace.txt
 # Ignore compiled Python files
 __pycache__/
 *.pyc
