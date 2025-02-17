@@ -66,3 +66,6 @@ def main():
 
 px_data = main()
 
+# Save data to csv file
+# px_data.to_csv('px_data.csv',index=False)
+
