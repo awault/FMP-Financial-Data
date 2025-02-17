@@ -1,14 +1,15 @@
+# src/formatter.py
 # Formatting Functions
 
 def convert_to_snake_case(Pascal_or_camelCased_string):
     """
-    Convert the column names of a DataFrame to snake_case.
+    Converts a Pascal case or camelCase string to snake_case.
     
     Args:
-        df (pd.DataFrame): Input DataFrame with original column names.
+        Pascal_or_camelCased_string: single string
         
     Returns:
-        pd.DataFrame: DataFrame with column names in snake_case.
+        A string converted to snake_case.
     
     """
     snake_cased_string = ''
@@ -21,4 +22,5 @@ def convert_to_snake_case(Pascal_or_camelCased_string):
         else:
             snake_cased_string += char
 
-        return snake_cased_string.strip('_')
+    return snake_cased_string.strip('_')
+
