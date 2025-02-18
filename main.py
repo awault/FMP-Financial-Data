@@ -102,8 +102,8 @@ def clean_and_format(pandas_df):
     # Drop columns
     pandas_df = pandas_df.drop(columns=columns_to_drop,errors='ignore')
 
-    # Convert date column to datetime
-    pandas_df['date'] = pd.to_datetime(pandas_df['date'])
+    # Convert date column to date datatype
+    pandas_df['date'] = pd.to_datetime(pandas_df['date']).dt.date
 
     print(f'\n{GREEN}Clean Column Names: {list(pandas_df.columns)}{RESET}\n')
 
