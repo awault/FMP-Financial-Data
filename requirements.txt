@@ -1,2 +1,3 @@
 # List of required Python packages
 python-dotenv
+sqlalchemy

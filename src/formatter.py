@@ -1,5 +1,23 @@
 # src/formatter.py
-# Formatting Functions
+# Cleaning and Formatting Functions
+
+# ANSI escape codes for colors
+BLUE = '\033[34m'
+CYAN = '\033[36m'
+GREEN = '\033[32m'
+MAGENTA = '\033[35m'
+RED = '\033[31m'
+YELLOW = '\033[33m'
+RESET = '\033[0m'
+
+
+
+
+
+
+
+
+
 
 def convert_to_snake_case(Pascal_or_camelCased_string):
     """
