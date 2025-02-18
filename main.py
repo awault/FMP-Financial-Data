@@ -122,9 +122,22 @@ try:
     conn = sqlite3.connect('fin_data.db')
 
     print(f'\nInserting data into daily_price table...')
+
+    # Ensure table is created with proper schema
+    conn.execute('''
+        CREATE TABLE IF NOT EXISTS daily_prices (
+            date TEXT,
+            open REAL,
+            high REAL,
+            low REAL,
+            close REAL,
+            adj_close REAL,
+            symbol TEXT
+        );
+    ''')
     
     # Insert DataFrame into SQLite
-    clean_data.to_sql('daily_price',conn,if_exists='replace',index=False)
+    clean_data.to_sql('daily_prices',conn,if_exists='replace',index=False)
 
     print("\nData has been successfully added to the database.")
 
