@@ -117,39 +117,19 @@ print(clean_data.info())
 
 print(f'\n{BOLD}Connecting to SQLite database...{RESET}')
 
+from sqlalchemy import create_engine
+
 try:
-    # Connect to SQLite
-    conn = sqlite3.connect('fin_data.db')
-
-    print(f'\nInserting data into daily_price table...')
-
-    # Ensure table is created with proper schema
-    conn.execute('''
-        CREATE TABLE IF NOT EXISTS daily_prices (
-            date TEXT,
-            open REAL,
-            high REAL,
-            low REAL,
-            close REAL,
-            adj_close REAL,
-            symbol TEXT
-        );
-    ''')
-    
     # Insert DataFrame into SQLite
-    clean_data.to_sql('daily_prices',conn,if_exists='replace',index=False)
-
-    print("\nData has been successfully added to the database.")
+    db_path = "fin_data.db"
+    engine = create_engine(f"sqlite:///{db_path}", echo=True)
+    clean_data.to_sql('daily_prices', engine, if_exists='replace', index=False)
+    print("\nData has been successfully added to SQLite database.")
 
 except Exception as e:
     print(f"\n{RED}Error: {e} {RESET}")
 
-finally:
-    if conn:
-        conn.close()
 
-
-
-# Save data to csv file
-# px_data.to_csv('px_data.csv',index=False)
+# Uncomment the line below to save clean_data to csv file
+# clean_data.to_csv('px_data.csv',index=False)
 
