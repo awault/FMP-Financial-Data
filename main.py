@@ -7,7 +7,7 @@ import sqlite3
 from dotenv import load_dotenv
 load_dotenv()
 
-# ANSI escape codes for text format
+# ANSI escape codes used to format text
 
 BLUE = '\033[34m'
 CYAN = '\033[36m'
@@ -77,7 +77,7 @@ def main():
             
             if invalid_tickers:
                 print(f'\n{RED}The following tickers are invalid:{invalid_tickers}{RESET}\n')
-            
+                
             return all_data
             
     else:
@@ -88,6 +88,7 @@ def main():
 data_frame = main()
 
 # Import column cleaning function
+from src.formatter import drop_columns
 from src.formatter import convert_to_snake_case
 
 # Define a function to clean and format data
@@ -96,11 +97,8 @@ def clean_and_format(pandas_df):
     # Convert column names to snake_case
     pandas_df.columns = pandas_df.columns.map(convert_to_snake_case)
 
-    # Select unnecessary columns
-    columns_to_drop = ['change','change_percent','vwap','label','change_over_time','volume','unadjusted_volume']
-    
-    # Drop columns
-    pandas_df = pandas_df.drop(columns=columns_to_drop,errors='ignore')
+    # Drop unnecessary columns
+    pandas_df = drop_columns(pandas_df)
 
     # Convert date column to date datatype
     pandas_df['date'] = pd.to_datetime(pandas_df['date']).dt.date
